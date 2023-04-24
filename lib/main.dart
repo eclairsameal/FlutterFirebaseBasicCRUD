@@ -31,7 +31,18 @@ class _MyAppState extends State<MyApp> {
   getStudentGPA(_gpa){
     this.studentGPA = _gpa;
   }
-
+  createData(){
+    print("created");
+  }
+  readData(){
+    print("read");
+  }
+  updateData(){
+    print("updated");
+  }
+  deleteData(){
+    print("deleted");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +128,9 @@ class _MyAppState extends State<MyApp> {
                   ),
                   child: Text("Create"),
                   textColor: Colors.white,
-                  onPressed: () {  },
+                  onPressed: () {
+                    createData();
+                  },
                 ),
                 RaisedButton(
                   color: Colors.blue,
@@ -126,25 +139,31 @@ class _MyAppState extends State<MyApp> {
                   ),
                   child: Text("Read"),
                   textColor: Colors.white,
-                  onPressed: () {  },
+                  onPressed: () {
+                    readData();
+                  },
                 ),
                 RaisedButton(
-                  color: Colors.yellow,
+                  color: Colors.amber,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text("Update"),
                   textColor: Colors.white,
-                  onPressed: () {  },
+                  onPressed: () {
+                    updateData();
+                  },
                 ),
                 RaisedButton(
-                  color: Colors.blue,
+                  color: Colors.red,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text("Delete"),
                   textColor: Colors.white,
-                  onPressed: () {  },
+                  onPressed: () {
+                    deleteData();
+                  },
                 ),
               ],
             ),
