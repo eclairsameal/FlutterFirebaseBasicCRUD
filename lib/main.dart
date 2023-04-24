@@ -15,6 +15,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late String studentName, studentID, studentProgramID;
+  late double studentGPA;
+
+  getStudentName(_name){
+    this.studentName = _name;
+  }
+  getStudentId(_id){
+    this.studentID = _id;
+  }
+  getStudentProgramId(_programId){
+    this.studentProgramID = _programId;
+  }
+  getStudentGPA(_gpa){
+    this.studentGPA = _gpa;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onChanged: (String name){
-
+                  getStudentName(name);
                 },
               ),
             ),
@@ -53,7 +69,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onChanged: (String id){
-
+                  getStudentId(id);
                 },
               ),
             ),
@@ -68,8 +84,8 @@ class _MyAppState extends State<MyApp> {
                           width: 2.0)
                   ),
                 ),
-                onChanged: (String programID){
-
+                onChanged: (String programId){
+                  getStudentProgramId(programId);
                 },
               ),
             ),
@@ -85,7 +101,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 onChanged: (String gpa){
-
+                  getStudentGPA(gpa);
                 },
               ),
             ),
