@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
+  debugShowCheckedModeBanner: false, // ?
     theme: ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.blue,
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,  // 解決鍵盤遮擋輸入框的問題
       appBar: AppBar(
         title: Text("My Flutter APP"),
       ),
@@ -104,6 +106,47 @@ class _MyAppState extends State<MyApp> {
                   getStudentGPA(gpa);
                 },
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text("Create"),
+                  textColor: Colors.white,
+                  onPressed: () {  },
+                ),
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text("Read"),
+                  textColor: Colors.white,
+                  onPressed: () {  },
+                ),
+                RaisedButton(
+                  color: Colors.yellow,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text("Update"),
+                  textColor: Colors.white,
+                  onPressed: () {  },
+                ),
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text("Delete"),
+                  textColor: Colors.white,
+                  onPressed: () {  },
+                ),
+              ],
             ),
           ],
         ),
