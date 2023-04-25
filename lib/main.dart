@@ -22,27 +22,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String? studentName, studentID, studentProgramID;
-  double? studentGPA;
+  final _studentNameController = TextEditingController();
+  final _studentIDController = TextEditingController();
+  final _studentProgramIDController = TextEditingController();
+  final _studentGPAController = TextEditingController();
 
-  getStudentName(_name){
-    this.studentName = _name;
-  }
-  getStudentId(_id){
-    this.studentID = _id;
-  }
-  getStudentProgramId(_programId){
-    this.studentProgramID = _programId;
-  }
-  getStudentGPA(_gpa){
-    this.studentGPA = double.parse(_gpa);
-  }
   createData(){
     Map<String, dynamic> st ={
-      "studentName": studentName,
-      "studentID": studentID,
-      "studentProgramID": studentProgramID,
-      "studentGPA": studentGPA
+      "studentName": _studentNameController.text,
+      "studentID": _studentIDController.text,
+      "studentProgramID": _studentProgramIDController.text,
+      "studentGPA": double.parse(_studentGPAController.text)
     };
     print(st);
     print("created");
@@ -71,6 +61,7 @@ class _MyAppState extends State<MyApp> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
+                controller: _studentNameController,
                 decoration: InputDecoration(
                   label: Text("Name"),
                   fillColor: Colors.white,
@@ -79,14 +70,12 @@ class _MyAppState extends State<MyApp> {
                     width: 2.0)
                   ),
                 ),
-                onChanged: (String name){
-                  getStudentName(name);
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
+                controller: _studentIDController,
                 decoration: InputDecoration(
                   label: Text("Student ID"),
                   fillColor: Colors.white,
@@ -95,14 +84,12 @@ class _MyAppState extends State<MyApp> {
                           width: 2.0)
                   ),
                 ),
-                onChanged: (String id){
-                  getStudentId(id);
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
+                controller: _studentProgramIDController,
                 decoration: InputDecoration(
                   label: Text("Study Program ID"),
                   fillColor: Colors.white,
@@ -111,14 +98,12 @@ class _MyAppState extends State<MyApp> {
                           width: 2.0)
                   ),
                 ),
-                onChanged: (String programId){
-                  getStudentProgramId(programId);
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
+                controller: _studentGPAController,
                 decoration: InputDecoration(
                   label: Text("GPA"),
                   fillColor: Colors.white,
@@ -127,9 +112,6 @@ class _MyAppState extends State<MyApp> {
                           width: 2.0)
                   ),
                 ),
-                onChanged: (String gpa){
-                  getStudentGPA(gpa);
-                },
               ),
             ),
             Row(
