@@ -29,13 +29,13 @@ class _MyAppState extends State<MyApp> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   createData() async {
-    Map<String, dynamic> st ={
+    Map<String, dynamic> g ={
       "name": _gameNameController.text,
       "developer": _gameDeveloperController.text,
       "genres": _gameGenresController.text,
       "release": double.parse(_gameReleaseController.text)
     };
-    await _db.collection("Games").doc(_gameNameController.text).set(st)
+    await _db.collection("Games").doc(_gameNameController.text).set(g)
     .then((value) => print("created"))
         .catchError((error) => print("Failed to add GAME: $error")
     );
@@ -53,11 +53,20 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
-  updateData(){
-    print("updated");
+  updateData() async {
+    Map<String, dynamic> g ={
+      "developer": _gameDeveloperController.text,
+      "genres": _gameGenresController.text,
+      "release": double.parse(_gameReleaseController.text)
+    };
+    await _db.collection("Games").doc(_gameNameController.text).update(g)
+        .then((value) => print("Updated"))
+        .catchError((error) => print("Failed to update game: $error"));
   }
-  deleteData(){
-    print("deleted");
+  deleteData() async{
+    await _db.collection("Games").doc(_gameNameController.text).delete()
+        .then((value) => print("Deleted"))
+        .catchError((error) => print("Failed to delete game: $error"));
   }
   @override
   Widget build(BuildContext context) {
