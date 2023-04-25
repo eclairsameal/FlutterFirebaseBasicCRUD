@@ -43,8 +43,15 @@ class _MyAppState extends State<MyApp> {
     // print("created");
   }
 
-  readData(){
-    print("read");
+  readData() async {
+    await _db.collection("Games").doc(_gameNameController.text).
+    get().then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        print('Document data: ${documentSnapshot.data()}');
+      } else {
+        print('Document does not exist on the database');
+      }
+    });
   }
   updateData(){
     print("updated");
