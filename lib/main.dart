@@ -5,7 +5,7 @@ void main() => runApp(MaterialApp(
     theme: ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.blue,
-      accentColor: Colors.cyan
+      // accentColor: Colors.cyan
     ),
   home: MyApp(),
   ),);
@@ -121,50 +121,127 @@ class _MyAppState extends State<MyApp> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RaisedButton(
-                  color: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text("Create"),
-                  textColor: Colors.white,
+                ElevatedButton(
                   onPressed: () {
                     createData();
                   },
-                ),
-                RaisedButton(
-                  color: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    elevation: 16,
                   ),
-                  child: Text("Read"),
-                  textColor: Colors.white,
+                  child: Text(
+                    'Create',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
                   onPressed: () {
                     readData();
                   },
-                ),
-                RaisedButton(
-                  color: Colors.amber,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    elevation: 16,
                   ),
-                  child: Text("Update"),
-                  textColor: Colors.white,
+                  child: Text(
+                    'Read',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
                   onPressed: () {
                     updateData();
                   },
-                ),
-                RaisedButton(
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    elevation: 16,
                   ),
-                  child: Text("Delete"),
-                  textColor: Colors.white,
+                  child: Text(
+                    'Update',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
                   onPressed: () {
                     deleteData();
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    elevation: 16,
+                  ),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
+
+                // RaisedButton(
+                //   color: Colors.green,
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(16),
+                //   ),
+                //   child: Text("Create"),
+                //   textColor: Colors.white,
+                //   onPressed: () {
+                //     createData();
+                //   },
+                // ),
+                // RaisedButton(
+                //   color: Colors.blue,
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(16),
+                //   ),
+                //   child: Text("Read"),
+                //   textColor: Colors.white,
+                //   onPressed: () {
+                //     readData();
+                //   },
+                // ),
+                // RaisedButton(
+                //   color: Colors.amber,
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(16),
+                //   ),
+                //   child: Text("Update"),
+                //   textColor: Colors.white,
+                //   onPressed: () {
+                //     updateData();
+                //   },
+                // ),
+                // RaisedButton(
+                //   color: Colors.red,
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(16),
+                //   ),
+                //   child: Text("Delete"),
+                //   textColor: Colors.white,
+                //   onPressed: () {
+                //     deleteData();
+                //   },
+                // ),
               ],
             ),
           ],
