@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false, // ?
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false, // ?
     theme: ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.blue,
       // accentColor: Colors.cyan
     ),
-  home: MyApp(),
+    home: MyApp(),
   ),);
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -16,8 +22,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late String studentName, studentID, studentProgramID;
-  late double studentGPA;
+  String? studentName, studentID, studentProgramID;
+  double? studentGPA;
 
   getStudentName(_name){
     this.studentName = _name;
@@ -29,9 +35,16 @@ class _MyAppState extends State<MyApp> {
     this.studentProgramID = _programId;
   }
   getStudentGPA(_gpa){
-    this.studentGPA = _gpa;
+    this.studentGPA = double.parse(_gpa);
   }
   createData(){
+    Map<String, dynamic> st ={
+      "studentName": studentName,
+      "studentID": studentID,
+      "studentProgramID": studentProgramID,
+      "studentGPA": studentGPA
+    };
+    print(st);
     print("created");
   }
   readData(){
@@ -45,6 +58,7 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
+    // CollectionReference firebaseStudents = FirebaseFirestore.instance.collection('Students');
     return Scaffold(
       resizeToAvoidBottomInset: false,  // 解決鍵盤遮擋輸入框的問題
       appBar: AppBar(
