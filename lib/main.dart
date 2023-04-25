@@ -22,21 +22,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _studentNameController = TextEditingController();
-  final _studentIDController = TextEditingController();
-  final _studentProgramIDController = TextEditingController();
-  final _studentGPAController = TextEditingController();
+  final _gameNameController = TextEditingController();
+  final _gameDeveloperController = TextEditingController();
+  final _gameGenresController = TextEditingController();
+  final _gameReleaseController = TextEditingController();
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  createData(){
+  createData() async {
     Map<String, dynamic> st ={
-      "studentName": _studentNameController.text,
-      "studentID": _studentIDController.text,
-      "studentProgramID": _studentProgramIDController.text,
-      "studentGPA": double.parse(_studentGPAController.text)
+      "name": _gameNameController.text,
+      "developer": _gameDeveloperController.text,
+      "genres": _gameGenresController.text,
+      "release": double.parse(_gameReleaseController.text)
     };
-    print(st);
-    print("created");
+    await _db.collection("Games").doc(_gameNameController.text).set(st)
+    .then((value) => print("created"))
+        .catchError((error) => print("Failed to add GAME: $error")
+    );
+    // print(st);
+    // print("created");
   }
+
   readData(){
     print("read");
   }
@@ -52,7 +58,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       resizeToAvoidBottomInset: false,  // 解決鍵盤遮擋輸入框的問題
       appBar: AppBar(
-        title: Text("My Flutter APP"),
+        title: const Text("My Flutter APP"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -61,8 +67,8 @@ class _MyAppState extends State<MyApp> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
-                controller: _studentNameController,
-                decoration: InputDecoration(
+                controller: _gameNameController,
+                decoration: const InputDecoration(
                   label: Text("Name"),
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
@@ -75,9 +81,9 @@ class _MyAppState extends State<MyApp> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
-                controller: _studentIDController,
-                decoration: InputDecoration(
-                  label: Text("Student ID"),
+                controller: _gameDeveloperController,
+                decoration: const InputDecoration(
+                  label: Text("Developer"),
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue,
@@ -89,9 +95,9 @@ class _MyAppState extends State<MyApp> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
-                controller: _studentProgramIDController,
-                decoration: InputDecoration(
-                  label: Text("Study Program ID"),
+                controller: _gameGenresController,
+                decoration: const InputDecoration(
+                  label: Text("Genres"),
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue,
@@ -103,9 +109,9 @@ class _MyAppState extends State<MyApp> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
-                controller: _studentGPAController,
-                decoration: InputDecoration(
-                  label: Text("GPA"),
+                controller: _gameReleaseController,
+                decoration: const InputDecoration(
+                  label: Text("Release"),
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue,
@@ -129,7 +135,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     elevation: 16,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Create',
                     style: TextStyle(
                       color: Colors.white,
@@ -148,7 +154,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     elevation: 16,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Read',
                     style: TextStyle(
                       color: Colors.white,
@@ -167,7 +173,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     elevation: 16,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Update',
                     style: TextStyle(
                       color: Colors.white,
@@ -186,58 +192,13 @@ class _MyAppState extends State<MyApp> {
                     ),
                     elevation: 16,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Delete',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
-
-                // RaisedButton(
-                //   color: Colors.green,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(16),
-                //   ),
-                //   child: Text("Create"),
-                //   textColor: Colors.white,
-                //   onPressed: () {
-                //     createData();
-                //   },
-                // ),
-                // RaisedButton(
-                //   color: Colors.blue,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(16),
-                //   ),
-                //   child: Text("Read"),
-                //   textColor: Colors.white,
-                //   onPressed: () {
-                //     readData();
-                //   },
-                // ),
-                // RaisedButton(
-                //   color: Colors.amber,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(16),
-                //   ),
-                //   child: Text("Update"),
-                //   textColor: Colors.white,
-                //   onPressed: () {
-                //     updateData();
-                //   },
-                // ),
-                // RaisedButton(
-                //   color: Colors.red,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(16),
-                //   ),
-                //   child: Text("Delete"),
-                //   textColor: Colors.white,
-                //   onPressed: () {
-                //     deleteData();
-                //   },
-                // ),
               ],
             ),
           ],
