@@ -42,8 +42,7 @@ class _MyAppState extends State<MyApp> {
     // print(st);
     // print("created");
   }
-
-  readData() async {
+  readData() async {   // 一次性讀取
     await _db.collection("Games").doc(_gameNameController.text).
     get().then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
@@ -163,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                     readData();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.red,
                     foregroundColor: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
@@ -182,7 +181,7 @@ class _MyAppState extends State<MyApp> {
                     updateData();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.green,
                     foregroundColor: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
@@ -201,7 +200,7 @@ class _MyAppState extends State<MyApp> {
                     deleteData();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.amber,
                     foregroundColor: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
@@ -217,6 +216,38 @@ class _MyAppState extends State<MyApp> {
                 ),
               ],
             ),
+            // StreamBuilder(
+            //   stream: _db.collection("Games").snapshots(),
+            //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+            //     if (snapshot.hasData) {
+            //       return ListView.builder(
+            //           itemCount:snapshot.data?.docs.length,
+            //           itemBuilder:(context, index) {
+            //             return ListTile(
+            //               title: Text(snapshot.data?.docs[index]['name']),
+            //               subtitle: Text(snapshot.data?.docs[index]['developer']),
+            //             );
+            //           }
+            //       );
+            //     }
+            //     return Text("No widget to build");
+            //   }
+            // ),
+
+
+        Expanded(
+          child: ListView.builder( // 適合列表項比較多或者列表項不確定的情況
+            //shrinkWrap: true,
+            itemCount: 5,
+            itemExtent: 50.0, // 强制高度为50.0
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(title: Text("$index"));
+            }
+          ),
+        ),
+
+
+
           ],
         ),
       ),
