@@ -26,8 +26,18 @@ class _MyAppState extends State<MyApp> {
   final _gameDeveloperController = TextEditingController();
   final _gameGenresController = TextEditingController();
   final _gameReleaseController = TextEditingController();
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;  // Firestore 實例
 
+  Widget buildCountList() {
+    return ListView.builder( // 適合列表項比較多或者列表項不確定的情況
+      //shrinkWrap: true,
+        itemCount: 5,
+        itemExtent: 50.0, // 强制高度为50.0
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(title: Text("$index"));
+        }
+    );
+  }
   createData() async {
     Map<String, dynamic> g ={
       "name": _gameNameController.text,
@@ -235,16 +245,18 @@ class _MyAppState extends State<MyApp> {
             // ),
 
 
-        Expanded(
-          child: ListView.builder( // 適合列表項比較多或者列表項不確定的情況
-            //shrinkWrap: true,
-            itemCount: 5,
-            itemExtent: 50.0, // 强制高度为50.0
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(title: Text("$index"));
-            }
-          ),
-        ),
+            Expanded(  // Expanded小部件使內容佔據所有可用空間。
+              // child: ListView.builder( // 適合列表項比較多或者列表項不確定的情況
+              //   //shrinkWrap: true,
+              //   itemCount: 5,
+              //   itemExtent: 50.0, // 强制高度为50.0
+              //   itemBuilder: (BuildContext context, int index) {
+              //     return ListTile(title: Text("$index"));
+              //   }
+              // ),
+              child:
+                buildCountList(),
+            ),
 
 
 
