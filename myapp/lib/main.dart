@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   final _gameReleaseController = TextEditingController();
   final FirebaseFirestore _db = FirebaseFirestore.instance;  // Firestore 實例
 
-  Widget buildCountList() {
+  Widget buildCountList() {  // 測試用的
     return ListView.builder( // 適合列表項比較多或者列表項不確定的情況
       //shrinkWrap: true,
         itemCount: 5,
@@ -38,6 +38,39 @@ class _MyAppState extends State<MyApp> {
         }
     );
   }
+  
+  Widget buildAllDataList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _db.collection("Games").snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+
+            return CircularProgressIndicator(
+              backgroundColor: Colors.grey[200],
+              valueColor: AlwaysStoppedAnimation(Colors.blue),
+            );
+          }else {
+            print('alllllllllllllllllllllllllllll');
+            print(snapshot.data?.docs.length);
+            print(snapshot.data?.docs[0]['name']);
+            return ListView.builder( // 適合列表項比較多或者列表項不確定的情況
+              //shrinkWrap: true,
+                itemCount: snapshot.data?.docs.length, // 資料庫裡資料筆數
+                itemExtent: 50.0, // 强制高度为50.0
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                      title: Text(snapshot.data?.docs[index]['name'])
+                  );
+                }
+            );
+
+
+
+          }
+        },
+    );
+  }
+  
   createData() async {
     Map<String, dynamic> g ={
       "name": _gameNameController.text,
@@ -255,7 +288,8 @@ class _MyAppState extends State<MyApp> {
               //   }
               // ),
               child:
-                buildCountList(),
+                //buildCountList()
+                buildAllDataList(),
             ),
 
 
